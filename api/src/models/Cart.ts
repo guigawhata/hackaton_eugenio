@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import User from './User';
@@ -15,6 +16,7 @@ class Cart {
   id: string;
 
   @ManyToOne(() => User, () => Cart)
+  @JoinColumn({ name: 'client_id' })
   client: User;
 
   @Column()

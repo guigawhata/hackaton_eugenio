@@ -21,10 +21,11 @@ class Product {
   id: string;
 
   @ManyToOne(() => ProductType, () => Product)
+  @JoinColumn({ name: 'product_type_id' })
   product_type: ProductType;
 
   @OneToOne(() => ProductProfile, () => Product)
-  @JoinColumn()
+  @JoinColumn({ name: 'profile_id' })
   profile: ProductProfile;
 
   @Column()
