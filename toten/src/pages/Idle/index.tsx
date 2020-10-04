@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { Container, Title, Button, Image } from './styles'
+import { Container, Title, ContainerView, Image } from './styles'
 import ImageBackground from '../../assets/retangulo.png'
 import ImageQrCode from '../../assets/scan-qrcode.png'
 
+import socket from '../../services/socket'
+
 const Idle: React.FC = ({ navigation }) => {
+
+  useEffect(() => {
+    socket.disconnect()
+    socket.connect()
+    socket.on('connect', () => { handleScan() })
+  }, [])
+
   const handleScan = () => {
     navigation.navigate('Home')
   }
@@ -14,9 +23,9 @@ const Idle: React.FC = ({ navigation }) => {
       <Title>
         Aponte o QrCode
       </Title>
-      <Button onPress={handleScan} activeOpacity={0.9}>
+      <ContainerView>
         <Image source={ImageQrCode} />
-      </Button>
+      </ContainerView>
     </Container>
   )
 }
