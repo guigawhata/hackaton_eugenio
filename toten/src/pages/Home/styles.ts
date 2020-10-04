@@ -6,17 +6,23 @@ export const Container = styled.View`
 `;
 
 export const ProfileContainer = styled.View<{ row: boolean }>`
-  flex-direction: ${props => props.row ? 'row' : 'column'};
+  flex-direction: column;
   width: 100%;
-  padding: 0 40px;
   align-self: center;
   margin: auto;
   justify-content: center;
   align-items: center;
+  padding: 0 5%;
+
+  ${props => props.row && css`
+    flex-direction: row;
+    height: 90px;
+  `};
 `;
 
 export const LogoNatura = styled.Image<{ loaded: boolean }>`
-  height: ${props => props.loaded ? 120 : 200}px;
+  height: ${props => props.loaded ? '90px' : '28%'};
+  width: ${props => props.loaded ? '350px' : '54%'};  
   resize-mode: contain;
 `;
 
@@ -26,8 +32,9 @@ export const ProfileImage = styled.Image<{ loaded: boolean }>`
   height: 200px;
 
   ${props => props.loaded && css`
-    width: 80px;
-    height: 80px;
+    height: 80%;
+    width: 100px;
+    resize-mode: contain;
     margin-top: auto;
     margin-left: auto;
   `};
@@ -40,8 +47,7 @@ export const ProfileName = styled.Text<{ loaded: boolean }>`
 
   ${props => props.loaded && css`
     font-size: 24px;
-    margin-top: 40px;
-    margin-left: 20px;
+    margin-top: 20px;
   `};
 `;
 

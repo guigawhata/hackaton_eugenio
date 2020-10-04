@@ -10,7 +10,7 @@ import promocoesPng from '../../assets/promocoes.png'
 import perfumariaPng from '../../assets/perfumaria.png'
 import maquiagemPng from '../../assets/maquiagem.png'
 
-const Home: React.FC = () => {
+const Home: React.FC = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,6 +18,10 @@ const Home: React.FC = () => {
       setLoading(false)
     }, 3000);
   }, [])
+
+  const handleNavigateToListProducts = (from: string) => {
+    navigation.navigate('ListProducts', { from: from })
+  }
 
   return (
     <Container>
@@ -29,23 +33,23 @@ const Home: React.FC = () => {
       {!loading && (
         <Content>
           <Row>
-            <Card>
+            <Card onPress={() => handleNavigateToListProducts('Novidades')}>
               <Thumbnail source={novidadesPng} />
               <TitleCard>Novidades</TitleCard>
             </Card>
-            <Card>
+            <Card onPress={() => handleNavigateToListProducts('Promocoes')}>
               <Thumbnail source={promocoesPng} />
               <TitleCard>Promoções</TitleCard>
             </Card>
           </Row>
           <Row>
-            <Card>
+            <Card onPress={() => handleNavigateToListProducts('Perfumaria')}>
               <Thumbnail source={perfumariaPng} />
-              <TitleCard>Perfumaria</TitleCard>
+              <TitleCard style={{ top: 30 }}>Perfumaria</TitleCard>
             </Card>
-            <Card>
+            <Card onPress={() => handleNavigateToListProducts('Maquiagem')}>
               <Thumbnail source={maquiagemPng} />
-              <TitleCard>Maquiagem</TitleCard>
+              <TitleCard style={{ top: 30 }}>Maquiagem</TitleCard>
             </Card>
           </Row>
         </Content>
