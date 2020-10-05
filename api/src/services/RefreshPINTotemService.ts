@@ -19,7 +19,11 @@ class RefreshPINTotemService {
       },
     });
 
-    console.log(totems);
+    (await totems).map(totem => {
+      totem.pin = hashPIN;
+
+      return totemRepository.save(totem);
+    });
   }
 }
 
