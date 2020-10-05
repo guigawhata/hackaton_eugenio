@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Container, Row, Title, ProfileContainer, ImageProfile, NameProfile, TagProfile, TextQrCode, ImageQrCode } from './styles'
+import { Container, Row, Title, ProfileContainer, ImageProfile, NameProfile, TagProfile, TextQrCode, ContainerQrCode } from './styles'
 import Icon from 'react-native-vector-icons/AntDesign'
+import QRCode from 'react-native-qrcode';
 
 import profilePng from '../../assets/profile.png';
-import qrCodePng from '../../assets/qr-code.png';
 
 const Home: React.FC = () => {
   return (
@@ -19,7 +19,13 @@ const Home: React.FC = () => {
         <TagProfile>#65473</TagProfile>
       </ProfileContainer>
       <TextQrCode>Aproxime o QRCode da banca para continuar a compra.</TextQrCode>
-      <ImageQrCode source={qrCodePng} />
+      <ContainerQrCode>
+        <QRCode
+          value={JSON.stringify({ id: 'de4389db-578b-4689-88f6-88271113dda8' })}
+          size={500}
+          bgColor='black'
+        />
+      </ContainerQrCode>
     </Container>
   )
 }

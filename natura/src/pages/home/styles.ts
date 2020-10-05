@@ -7,6 +7,7 @@ const { width } = Dimensions.get('screen')
 export const Container = styled.ScrollView`
   width: 100%;
   padding: 20px 40px;
+  background: white;
 `;
 
 export const Row = styled.View`
@@ -24,7 +25,7 @@ export const Title = styled.Text`
 export const ProfileContainer = styled.View`
   align-items:center;
   width: 100%;
-  margin-top: ${width / 5}px;
+  margin-top: ${width / 8}px;
 `;
 
 export const ImageProfile = styled.Image`
@@ -49,12 +50,11 @@ export const TextQrCode = styled.Text`
   color: #3F3F3F;
   font-size: 18px;
   text-align:center;
-  margin-top: ${width / 8}px;
+  margin-top: ${width / 10}px;
 `;
 
-export const ImageQrCode = styled.Image`
-  width: 250px;
-  height: 250px;
-  margin: 0 auto;
-  margin-top: ${width / 15}px;
+export const ContainerQrCode = styled.View`
+  margin: 30px 0;
+  width: 300px;
+  height: 300px;
 `;

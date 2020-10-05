@@ -15,7 +15,7 @@ export const Title = styled.Text`
   color: white;
 `;
 
-export const Button = styled.TouchableOpacity`
+export const ContainerView = styled.View`
   align-self: center;
   margin-top: 40px;
 `;
