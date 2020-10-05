@@ -19,11 +19,11 @@ class Cart {
   @JoinColumn({ name: 'client_id' })
   client: User;
 
-  @Column()
-  finished_at: Date;
+  @Column({ nullable: true })
+  finished_at?: Date;
 
-  @Column()
-  cancelled_at: Date;
+  @Column({ nullable: true })
+  cancelled_at?: Date;
 
   @CreateDateColumn()
   created_at: Date;

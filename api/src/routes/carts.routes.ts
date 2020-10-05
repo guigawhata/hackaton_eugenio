@@ -1,25 +1,26 @@
 import { Router } from 'express';
 
 import CreateCartService from '../services/CreateCartService';
-import uploadConfig from '../config/upload';
 
 const cartsRouter = Router();
 
 cartsRouter.post('/', async (request, response) => {
-  const { name, username, email, password } = request.body;
+  const { id, qr_reader_id } = request.body;
 
-  const storeUser = new CreateCartService();
+  const { io } = request;
 
-  const user = await storeUser.execute({
-    name,
-    email,
-    username,
-    password,
+  const { connectedTotems } = request;
+
+  const createCart = new CreateCartService();
+
+  const cart = await createCart.execute({
+    id,
+    qr_reader_id,
+    io,
+    connectedTotems,
   });
 
-  delete user.password;
-
-  return response.json(user);
+  return response.json(cart);
 });
 
 export default cartsRouter;

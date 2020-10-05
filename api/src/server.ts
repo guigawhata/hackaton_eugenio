@@ -1,19 +1,51 @@
+import 'reflect-metadata';
+
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import http from 'http';
+import socketio from 'socket.io';
+
+import './database';
 import AppError from './errors/AppError';
 
 import routes from './routes';
-import setupWebsocket from './websocket';
 import uploadConfig from './config/upload';
-import './database';
 
 const app = express();
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory));
-
 const server = new http.Server(app);
-setupWebsocket(server);
+const io = socketio(server);
+
+const connectedTotems = {};
+
+io.on('connection', socket => {
+  const { totem_id } = socket.handshake.query;
+
+  // eslint-disable-next-line no-console
+  console.log(`🖥  socket ${socket.id} connected!`);
+
+  connectedTotems[totem_id] = socket.id;
+
+  // eslint-disable-next-line no-console
+  console.log(connectedTotems);
+
+  socket.on('disconnect', () => {
+    // eslint-disable-next-line no-console
+    console.log(`🖥  socket ${socket.id} disconnected!`);
+
+    delete connectedTotems[totem_id];
+
+    // eslint-disable-next-line no-console
+    console.log(connectedTotems);
+  });
+});
+
+app.use((request: Request, _: Response, next: NextFunction) => {
+  request.connectedTotems = connectedTotems;
+  request.io = io;
+  next();
+});
 
 app.use(routes);
 
