@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class APIMigration1601888299780 implements MigrationInterface {
-    name = 'APIMigration1601888299780'
+export class APIMigration1601917452356 implements MigrationInterface {
+    name = 'APIMigration1601917452356'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "users" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "username" character varying NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "avatar" character varying DEFAULT null, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`);
@@ -10,7 +10,7 @@ export class APIMigration1601888299780 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "product_profiles" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "aroma" character varying NOT NULL, "quantity_ml" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_bb8fba1cc1611d5c1b15aaf471f" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "product_types" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "type" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_6ad7b08e6491a02ebc9ed82019d" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "products" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "quantity" integer NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "product_type_id" uuid, "profile_id" uuid, CONSTRAINT "REL_0a37021d055ab21b7ec00d2a4c" UNIQUE ("profile_id"), CONSTRAINT "PK_0806c755e0aca124e67c0cf6d7d" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "totems" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "status" character varying NOT NULL, "pin" character varying NOT NULL, "qr_reader_id" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_694dd11e9c3a9f9a0c77d402461" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "totems" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "status" character varying NOT NULL, "pin" character varying NOT NULL, "qr_reader_id" character varying, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_694dd11e9c3a9f9a0c77d402461" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "products_images_images" ("productsId" uuid NOT NULL, "imagesId" uuid NOT NULL, CONSTRAINT "PK_6026db3396a9853484699de9365" PRIMARY KEY ("productsId", "imagesId"))`);
         await queryRunner.query(`CREATE INDEX "IDX_7ee38a4cd167c44d94cb0be917" ON "products_images_images" ("productsId") `);
         await queryRunner.query(`CREATE INDEX "IDX_57fbf176c86e29281369d65f3b" ON "products_images_images" ("imagesId") `);

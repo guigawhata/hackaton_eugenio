@@ -17,7 +17,7 @@ class Totem {
   @Column()
   pin?: string;
 
-  @Column()
+  @Column({ nullable: true })
   qr_reader_id: string;
 
   @CreateDateColumn()

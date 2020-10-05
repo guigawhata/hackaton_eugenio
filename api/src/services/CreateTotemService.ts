@@ -11,9 +11,9 @@ class CreateTotemService {
   public async execute({ qr_reader_id }: Request): Promise<Totem> {
     const totemRepository = getRepository(Totem);
 
-    const pin = Math.random().toString(36).substring(7);
+    const pin = '123456';
 
-    const hashPIN = await hash(pin.toUpperCase(), 8);
+    const hashPIN = await hash(pin, 8);
 
     const totem = totemRepository.create({
       status: 'offline',

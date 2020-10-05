@@ -74,13 +74,11 @@ async function startServer() {
   async function refreshPIN() {
     const refreshPINTotem = new RefreshPINTotemService();
 
-    await refreshPINTotem.execute();
+    await refreshPINTotem.execute(io);
 
-    console.log('PIN Refresh');
-
-    setTimeout(refreshPIN, 10 * 1000);
+    setTimeout(refreshPIN, 50 * 1000);
   }
-  refreshPIN();
+  // refreshPIN();
 
   server.listen(3333, () => {
     // eslint-disable-next-line no-console

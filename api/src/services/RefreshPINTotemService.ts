@@ -1,17 +1,16 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-
-import AppError from '../errors/AppError';
+import { Socket } from 'socket.io';
 
 import Totem from '../models/Totem';
 
+interface Request {
+  io: Socket;
+}
+
 class RefreshPINTotemService {
-  public async execute(): Promise<void> {
+  public async execute(io: Request): Promise<void> {
     const totemRepository = getRepository(Totem);
-
-    const pin = Math.random().toString(36).substring(7);
-
-    const hashPIN = await hash(pin.toUpperCase(), 8);
 
     const totems = totemRepository.find({
       where: {
@@ -19,10 +18,19 @@ class RefreshPINTotemService {
       },
     });
 
-    (await totems).map(totem => {
+    (await totems).map(async totem => {
+      const pin = Math.random().toString(36).substring(7);
+
+      const hashPIN = await hash(pin.toUpperCase(), 8);
+
       totem.pin = hashPIN;
 
-      return totemRepository.save(totem);
+      await totemRepository.save(totem);
+
+      io.sockets.emit('pin', {
+        id: totem.id,
+        pin: pin.toUpperCase(),
+      });
     });
   }
 }
