@@ -29,6 +29,8 @@ import product2 from '../../assets/product2.png'
 import product3 from '../../assets/product3.png'
 import product4 from '../../assets/product4.png'
 
+import api from '../../services/api'
+
 
 const ProductDetails: React.FC = ({ navigation, route }) => {
 
@@ -44,6 +46,10 @@ const ProductDetails: React.FC = ({ navigation, route }) => {
 
   const handleListProducts = () => {
     navigation.navigate('ListProducts')
+  }
+
+  const handleSubmit = async () => {
+    await api.post('/')
   }
 
   return (
@@ -71,7 +77,7 @@ const ProductDetails: React.FC = ({ navigation, route }) => {
             <ProductOtherItem source={products[product.toLocaleLowerCase()]} />
           </ListOtherItems>
         </Column>
-        <Button style={{ backgroundColor: '#EB6618', position: 'absolute', right: '5%', top: '7%' }}>
+        <Button onPress={handleSubmit} style={{ backgroundColor: '#EB6618', position: 'absolute', right: '5%', top: '7%' }}>
           <ButtonText>
             Quero Provar!
           </ButtonText>
