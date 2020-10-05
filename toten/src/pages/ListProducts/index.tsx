@@ -16,25 +16,25 @@ const ListProducts: React.FC = ({ navigation, route }) => {
 
   const { from } = route.params;
   const [items, setItems] = useState([
-    { id: '1', image: product1, name: 'product1' },
-    { id: '2', image: product2, name: 'product2' },
-    { id: '3', image: product3, name: 'product3' },
-    { id: '4', image: product4, name: 'product4' },
-    { id: '5', image: product1, name: 'product1' },
-    { id: '6', image: product2, name: 'product2' },
-    { id: '7', image: product3, name: 'product3' },
-    { id: '8', image: product4, name: 'product4' },
-    { id: '9', image: product1, name: 'product1' },
-    { id: '10', image: product2, name: 'product2' },
-    { id: '11', image: product3, name: 'product3' },
-    { id: '12', image: product4, name: 'product4' },
-    { id: '13', image: product1, name: 'product1' },
-    { id: '14', image: product2, name: 'product2' },
-    { id: '15', image: product3, name: 'product3' },
-    { id: '16', image: product4, name: 'product4' },
+    { id: 'a803f8ef-4351-43ba-97af-6e8e0c705e92', image: product1, name: 'product1' },
+    { id: '5d39cce4-c95e-4024-8f11-bb96d24f4d09', image: product2, name: 'product2' },
+    { id: '5b14fb89-be63-4c8d-8890-1f169bfa5644', image: product3, name: 'product3' },
+    { id: 'c447c1c8-e83f-4c69-94eb-547380c9c7ce', image: product4, name: 'product4' },
+    { id: 'a803f8ef-4351-43ba-97af-6e8e0c705e92', image: product1, name: 'product1' },
+    { id: '5d39cce4-c95e-4024-8f11-bb96d24f4d09', image: product2, name: 'product2' },
+    { id: '5b14fb89-be63-4c8d-8890-1f169bfa5644', image: product3, name: 'product3' },
+    { id: 'c447c1c8-e83f-4c69-94eb-547380c9c7ce', image: product4, name: 'product4' },
+    { id: 'a803f8ef-4351-43ba-97af-6e8e0c705e92', image: product1, name: 'product1' },
+    { id: '5d39cce4-c95e-4024-8f11-bb96d24f4d09', image: product2, name: 'product2' },
+    { id: '5b14fb89-be63-4c8d-8890-1f169bfa5644', image: product3, name: 'product3' },
+    { id: 'c447c1c8-e83f-4c69-94eb-547380c9c7ce', image: product4, name: 'product4' },
+    { id: 'a803f8ef-4351-43ba-97af-6e8e0c705e92', image: product1, name: 'product1' },
+    { id: '5d39cce4-c95e-4024-8f11-bb96d24f4d09', image: product2, name: 'product2' },
+    { id: '5b14fb89-be63-4c8d-8890-1f169bfa5644', image: product3, name: 'product3' },
+    { id: 'c447c1c8-e83f-4c69-94eb-547380c9c7ce', image: product4, name: 'product4' },
   ])
 
-  const handleProductDetails = (product: string) => {
+  const handleProductDetails = (product: { id: string; image: string }) => {
     navigation.navigate('ProductDetails', { from: from, product: product })
   }
 
@@ -49,10 +49,10 @@ const ListProducts: React.FC = ({ navigation, route }) => {
         <Title>{from}</Title>
       </Divider>
       <Content>
-        {items.map(item => (
+        {items.map((item, index) => (
           <Card
-            key={item.id}
-            onPress={() => handleProductDetails(item.name)}
+            key={index}
+            onPress={() => handleProductDetails(item)}
             style={{
               shadowColor: "#aaa",
               shadowOffset: {
