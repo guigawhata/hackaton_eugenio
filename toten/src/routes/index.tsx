@@ -5,6 +5,7 @@ import Idle from '../pages/Idle'
 import Home from '../pages/Home'
 import ListProducts from '../pages/ListProducts'
 import ProductDetails from '../pages/ProductDetails'
+import Voucher from '../pages/Voucher'
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ function Routes() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ListProducts" component={ListProducts} />
         <Stack.Screen name="ProductDetails" component={ProductDetails} />
+        <Stack.Screen name="Voucher" component={Voucher} />
       </Stack.Navigator>
     </NavigationContainer>
   );

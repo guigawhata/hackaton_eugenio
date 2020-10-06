@@ -53,6 +53,10 @@ const ProductDetails: React.FC = ({ navigation, route }) => {
       product_id: product.id,
       client_id: 'de4389db-578b-4689-88f6-88271113dda8',
       totem_id: '501ca674-ce78-4702-851a-3fbba2955830'
+    }).finally(() => {
+      setTimeout(() => {
+        navigation.navigate('Voucher')
+      }, 1000);
     })
 
   }
