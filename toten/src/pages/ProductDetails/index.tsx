@@ -29,11 +29,13 @@ import product2 from '../../assets/product2.png'
 import product3 from '../../assets/product3.png'
 import product4 from '../../assets/product4.png'
 
+import api from '../../services/api'
+
 
 const ProductDetails: React.FC = ({ navigation, route }) => {
 
   const from = route.params.from as string;
-  const product = route.params.product as string;
+  const product = route.params.product as { id: string; image: string; name: string };
 
   const products = {
     product1: product1,
@@ -44,6 +46,19 @@ const ProductDetails: React.FC = ({ navigation, route }) => {
 
   const handleListProducts = () => {
     navigation.navigate('ListProducts')
+  }
+
+  const handleSubmit = async () => {
+    await api.post('/totems/try-aroma', {
+      product_id: product.id,
+      client_id: 'de4389db-578b-4689-88f6-88271113dda8',
+      totem_id: '501ca674-ce78-4702-851a-3fbba2955830'
+    }).finally(() => {
+      setTimeout(() => {
+        navigation.navigate('Voucher')
+      }, 1000);
+    })
+
   }
 
   return (
@@ -57,7 +72,7 @@ const ProductDetails: React.FC = ({ navigation, route }) => {
         <Title>{from}</Title>
       </Divider>
       <Content>
-        <ProductItem source={products[product.toLocaleLowerCase()]} />
+        <ProductItem source={products[product.name.toLocaleLowerCase()]} />
         <Column>
           <ProductName>Nome do Produto</ProductName>
           <ProductTag>#4322</ProductTag>
@@ -65,13 +80,13 @@ const ProductDetails: React.FC = ({ navigation, route }) => {
             Descrição
           </ProductDescription>
           <ListOtherItems>
-            <ProductOtherItem source={products[product.toLocaleLowerCase()]} />
-            <ProductOtherItem source={products[product.toLocaleLowerCase()]} />
-            <ProductOtherItem source={products[product.toLocaleLowerCase()]} />
-            <ProductOtherItem source={products[product.toLocaleLowerCase()]} />
+            <ProductOtherItem source={products[product.name.toLocaleLowerCase()]} />
+            <ProductOtherItem source={products[product.name.toLocaleLowerCase()]} />
+            <ProductOtherItem source={products[product.name.toLocaleLowerCase()]} />
+            <ProductOtherItem source={products[product.name.toLocaleLowerCase()]} />
           </ListOtherItems>
         </Column>
-        <Button style={{ backgroundColor: '#EB6618', position: 'absolute', right: '5%', top: '7%' }}>
+        <Button onPress={handleSubmit} style={{ backgroundColor: '#EB6618', position: 'absolute', right: '5%', top: '7%' }}>
           <ButtonText>
             Quero Provar!
           </ButtonText>
