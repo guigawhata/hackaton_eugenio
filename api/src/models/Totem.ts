@@ -17,8 +17,11 @@ class Totem {
   @Column()
   pin?: string;
 
-  @Column({ nullable: true })
+  @Column()
   qr_reader_id: string;
+
+  @Column()
+  aroma_dispenser_id: string;
 
   @CreateDateColumn()
   created_at: Date;

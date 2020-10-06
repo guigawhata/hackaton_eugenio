@@ -5,10 +5,14 @@ import Totem from '../models/Totem';
 
 interface Request {
   qr_reader_id: string;
+  aroma_dispenser_id: string;
 }
 
 class CreateTotemService {
-  public async execute({ qr_reader_id }: Request): Promise<Totem> {
+  public async execute({
+    qr_reader_id,
+    aroma_dispenser_id,
+  }: Request): Promise<Totem> {
     const totemRepository = getRepository(Totem);
 
     const pin = '123456';
@@ -19,6 +23,7 @@ class CreateTotemService {
       status: 'offline',
       pin: hashPIN,
       qr_reader_id,
+      aroma_dispenser_id,
     });
 
     await totemRepository.save(totem);

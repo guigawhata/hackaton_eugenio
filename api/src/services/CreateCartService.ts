@@ -44,7 +44,10 @@ class CreateCartService {
 
     const socket = connectedTotems[findTotem.id];
 
-    io.to(socket).emit('welcome', `Olá ${user.name}`);
+    io.to(socket).emit('welcome', {
+      totem: findTotem,
+      user,
+    });
 
     const checkExistingCart = await cartRepository.findOne({
       where: {
